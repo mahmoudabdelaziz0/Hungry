@@ -46,6 +46,8 @@ flutter:
     - assets/
     - assets/logo/
     - assets/splash/
+    - assets/test/
+
 
 
   # fonts:
