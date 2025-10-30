@@ -4,6 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry/core/constans/app_color.dart';
 import 'package:hungry/features/home/widgets/card_item.dart';
+import 'package:hungry/features/home/widgets/food_catgory.dart';
+import 'package:hungry/features/home/widgets/search.dart';
+import 'package:hungry/features/home/widgets/user_header.dart';
 import 'package:hungry/shared/custom_text.dart';
 
 class HomeView extends StatefulWidget {
@@ -36,110 +39,45 @@ class _HomeViewState extends State<HomeView> {
 
 
 slivers: [
+  /// header
+  SliverAppBar(
+    elevation: 0,
+    scrolledUnderElevation: 0,
+pinned:true ,
+    backgroundColor: Colors.white,
+    toolbarHeight: 200,
+automaticallyImplyLeading: false,
 
-  ///AppBar
+flexibleSpace:    Padding(
+
+  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
+
+  child: Column(
+    children: [
+
+      UserHeader(username: "My Lovely Biba"),
+
+      Gap(20),
+
+
+      SearchField(),
+
+
+    ],
+  ),
+),
+
+
+  ),
+
+  /// Category
 SliverToBoxAdapter(
+
   child: Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15),
-    child: Column(
-      children: [
-        Gap(20),
 
-        ////Header
-        Row(
+    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+    child: FoodCatgory(selectedIndex: selectedIndex, categoty: categoty)
 
-          children: [
-            Column(
-              crossAxisAlignment:CrossAxisAlignment.start ,
-              children: [
-                Gap(70),
-                SvgPicture.asset('assets/logo/Logo_hungry.svg',color:AppColors.primary ,height: 40,),
-                Gap(5),
-                CustomText(text: "Heloo ,Zizo", color: Colors.grey.shade500, fontSize: 16, weight: FontWeight.w500)
-
-              ],
-            ),
-            Spacer(),
-            CircleAvatar(radius: 35,),
-
-          ],
-
-        ),
-
-        Gap(25),
-        //search bar
-        Material(
-          elevation: 3,
-          shadowColor: Colors.grey,
-          borderRadius: BorderRadius.circular(12),
-          child: TextField(
-            decoration: InputDecoration(
-                prefixIcon: Icon(CupertinoIcons.search),
-                hintText: "Search..",
-                fillColor:Colors.white ,
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                        color: Colors.white
-                    )
-
-                )
-            ),
-          ),
-        ),
-
-        Gap(25),
-
-
-
-
-
-        //// Category
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-
-            children: List.generate(categoty.length, (index){
-
-              return GestureDetector(
-
-                onTap:(){
-                  setState(() {
-                    selectedIndex=index;
-                  });
-
-                } ,
-                child: Container(
-                    margin: EdgeInsets.only(right: 9),
-                    decoration: BoxDecoration(
-                        color:selectedIndex==index?AppColors.primary:Color(0xffF3F4F6)
-
-
-                        ,
-                        borderRadius: BorderRadius.circular(20)
-
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 27,vertical: 15),
-                    child:CustomText(text: categoty[index],weight:FontWeight.w500,color: selectedIndex==index?Colors.white:Colors.grey.shade700)
-
-
-
-                ),
-              );
-            }),
-          ),
-
-
-
-
-
-
-        ),
-
-
-      ],
-    ),
   ),
 
 ),
