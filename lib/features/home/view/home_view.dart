@@ -27,73 +27,80 @@ class _HomeViewState extends State<HomeView> {
     return GestureDetector(
       onTap:()=>FocusScope.of(context).unfocus() ,
       child: Scaffold(
-        body:
-        Padding(
 
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: SingleChildScrollView(
 
-            child: Column(
 
-            children: [
-              Gap(20),
 
-              ////Header
-              Row(
 
-            children: [
-              Column(
-                crossAxisAlignment:CrossAxisAlignment.start ,
-                children: [
-            Gap(70),
-            SvgPicture.asset('assets/logo/Logo_hungry.svg',color:AppColors.primary ,height: 40,),
-                  Gap(5),
-                  CustomText(text: "Heloo ,Zizo", color: Colors.grey.shade500, fontSize: 16, weight: FontWeight.w500)
+        body:CustomScrollView(
 
-                ],
-              ),
-                  Spacer(),
-              CircleAvatar(radius: 35,),
 
-            ],
+slivers: [
 
-              ),
+  ///AppBar
+SliverToBoxAdapter(
+  child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15),
+    child: Column(
+      children: [
+        Gap(20),
 
-              Gap(25),
-              //search bar
-              Material(
-                elevation: 3,
-                shadowColor: Colors.grey,
-                borderRadius: BorderRadius.circular(12),
-                child: TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(CupertinoIcons.search),
-                    hintText: "Search..",
-                    fillColor:Colors.white ,
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
+        ////Header
+        Row(
+
+          children: [
+            Column(
+              crossAxisAlignment:CrossAxisAlignment.start ,
+              children: [
+                Gap(70),
+                SvgPicture.asset('assets/logo/Logo_hungry.svg',color:AppColors.primary ,height: 40,),
+                Gap(5),
+                CustomText(text: "Heloo ,Zizo", color: Colors.grey.shade500, fontSize: 16, weight: FontWeight.w500)
+
+              ],
+            ),
+            Spacer(),
+            CircleAvatar(radius: 35,),
+
+          ],
+
+        ),
+
+        Gap(25),
+        //search bar
+        Material(
+          elevation: 3,
+          shadowColor: Colors.grey,
+          borderRadius: BorderRadius.circular(12),
+          child: TextField(
+            decoration: InputDecoration(
+                prefixIcon: Icon(CupertinoIcons.search),
+                hintText: "Search..",
+                fillColor:Colors.white ,
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
                         color: Colors.white
-                      )
-
                     )
-                  ),
-                ),
-              ),
 
-            Gap(25),
+                )
+            ),
+          ),
+        ),
+
+        Gap(25),
 
 
 
 
 
-            //// Category
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
+        //// Category
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
 
-                children: List.generate(categoty.length, (index){
+            children: List.generate(categoty.length, (index){
 
               return GestureDetector(
 
@@ -104,7 +111,7 @@ class _HomeViewState extends State<HomeView> {
 
                 } ,
                 child: Container(
-                  margin: EdgeInsets.only(right: 9),
+                    margin: EdgeInsets.only(right: 9),
                     decoration: BoxDecoration(
                         color:selectedIndex==index?AppColors.primary:Color(0xffF3F4F6)
 
@@ -120,55 +127,65 @@ class _HomeViewState extends State<HomeView> {
 
                 ),
               );
-                }),
-              ),
-
-
-
-
-
-
-            ),
-
-            Gap(25),
-
-              GridView.builder(
-physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount: 6,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-                  childAspectRatio: 0.64,
-                    mainAxisSpacing: 2,
-                  ),
-                  itemBuilder: (context,index){
-
-                    return  CardItem(image: "assets/test/Berger.png",
-                        text: "Cheeseburger",
-                        desc: "Most recommended in Hurghada",
-                        rate: "4.9");
-                  })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            ],
-
-            ),
+            }),
           ),
-        )
-        ,
+
+
+
+
+
+
+        ),
+
+
+      ],
+    ),
+  ),
+
+),
+/// GridView
+
+  SliverPadding(padding: EdgeInsets.symmetric(horizontal: 15,),
+    sliver: SliverGrid(delegate: SliverChildBuilderDelegate(
+childCount: 6,
+          (context,index){
+      return CardItem(image: "assets/test/Berger.png",
+          text: "Premium Cheese burger",
+          desc: "Most Recommended In Hurghada",
+          rate: "4.9");
+
+    },),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
+          childAspectRatio: 0.59,
+
+
+        )),
+
+
+  )
+
+
+
+],
+
+
+
+        ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       ),
