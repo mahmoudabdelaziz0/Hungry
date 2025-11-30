@@ -7,6 +7,7 @@ import 'package:hungry/features/home/widgets/card_item.dart';
 import 'package:hungry/features/home/widgets/food_catgory.dart';
 import 'package:hungry/features/home/widgets/search.dart';
 import 'package:hungry/features/home/widgets/user_header.dart';
+import 'package:hungry/features/product/view/product_details_view.dart';
 import 'package:hungry/shared/custom_text.dart';
 
 class HomeView extends StatefulWidget {
@@ -85,14 +86,21 @@ SliverToBoxAdapter(
 
   SliverPadding(padding: EdgeInsets.symmetric(horizontal: 15,),
     sliver: SliverGrid(delegate: SliverChildBuilderDelegate(
-childCount: 6,
-          (context,index){
-      return CardItem(image: "assets/test/Berger.png",
-          text: "Premium Cheese burger",
-          desc: "Most Recommended In Hurghada",
-          rate: "4.9");
+childCount: 6, 
+          (context,index)=>
+       GestureDetector(
+         onTap: (){
+           Navigator.push(context,MaterialPageRoute(builder: (c){
+             return ProductDetailsView();
+           }) );
+         },
+         child: CardItem(image: "assets/test/Berger.png",
+             text: "Premium Cheese burger",
+             desc: "Most Recommended In Hurghada",
+             rate: "4.9"),
+       )
 
-    },),
+    ,),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
           childAspectRatio: 0.59,
 

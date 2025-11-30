@@ -5,5 +5,21 @@ class Assets {
   static const String logoLogoHungry = 'assets/logo/Logo_hungry.svg';
   static const String splashSplashBerger = 'assets/splash/splash_berger.png';
   static const String testBerger = 'assets/test/Berger.png';
+  static const String testBicon = 'assets/test/Bicon.png';
+  static const String testBraber1 = 'assets/test/Braber1.png';
+  static const String testBrager2 = 'assets/test/Brager2.png';
+  static const String testBrager3 = 'assets/test/Brager3.png';
+  static const String testColeslaw = 'assets/test/Coleslaw.png';
+  static const String testFries = 'assets/test/Fries.png';
+  static const String testOninRings = 'assets/test/oninRings.png';
+  static const String testOnions = 'assets/test/onions.png';
+  static const String testPickeles = 'assets/test/Pickeles.png';
+  static const String testPicklle = 'assets/test/picklle.png';
+  static const String testPlus = 'assets/test/plus.png';
+  static const String testSalad = 'assets/test/Salad.png';
+  static const String testSandwitch = 'assets/test/Sandwitch.png';
+  static const String testTomato = 'assets/test/tomato.png';
+  static const String test🌶️ = 'assets/test/🌶️.png';
+  static const String test🥶 = 'assets/test/🥶.png';
 
 }
