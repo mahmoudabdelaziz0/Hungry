@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry/core/constans/app_color.dart';
 import 'package:hungry/features/cart/widgets/cart_Item.dart';
+import 'package:hungry/features/checkout/view/checkout_view.dart';
 import 'package:hungry/shared/custom_Button.dart';
 import 'package:hungry/shared/custom_text.dart';
 
@@ -55,7 +56,14 @@ topRight: Radius.circular(30)
               ],
             ),
             Gap(10),
-            CustomButton(text: 'Checkout',onTap: (){},),
+            CustomButton(text: 'Checkout',
+
+              onTap: (){
+Navigator.push(context, MaterialPageRoute(builder: (c){
+  return CheckoutView();
+}));
+              
+              },),
 
 
 

@@ -5,12 +5,14 @@ import 'custom_text.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.text, this.onTap, this.width,
-     this.color});
+     this.color, this.height});
 
 final String text;
 
 final Function()? onTap;
 final  double? width;
+  final  double? height;
+
 final  Color? color;
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,10 @@ final  Color? color;
         onTap: onTap,
         child: Container(
           width: width,
-
+height:height??55 ,
           padding: EdgeInsets.symmetric(horizontal: 18,vertical: 15),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(10),
               color: color??AppColors.primary,
           ),
           child: Center(child: CustomText(text: text,weight: FontWeight.bold,color: Colors.white,fontSize: 16,)),

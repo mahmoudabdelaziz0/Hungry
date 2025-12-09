@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
 
+  static const String iconsCash = 'assets/icons/cash.png';
+  static const String iconsVVisa = 'assets/icons/VVisa.jpeg';
+  static const String iconsVisa = 'assets/icons/visa.png';
+  static const String iconsVisaa = 'assets/icons/visaa.png';
   static const String logoLogoHungry = 'assets/logo/Logo_hungry.svg';
   static const String splashSplashBerger = 'assets/splash/splash_berger.png';
   static const String testBerger = 'assets/test/Berger.png';
@@ -18,6 +22,7 @@ class Assets {
   static const String testPlus = 'assets/test/plus.png';
   static const String testSalad = 'assets/test/Salad.png';
   static const String testSandwitch = 'assets/test/Sandwitch.png';
+  static const String testSuccess ! = 'assets/test/Success !.png';
   static const String testTomato = 'assets/test/tomato.png';
   static const String test🌶️ = 'assets/test/🌶️.png';
   static const String test🥶 = 'assets/test/🥶.png';
