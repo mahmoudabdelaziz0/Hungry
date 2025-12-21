@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String iconsCash = 'assets/icons/cash.png';
+  static const String iconsSettings = 'assets/icons/settings.svg';
   static const String iconsVVisa = 'assets/icons/VVisa.jpeg';
   static const String iconsVisa = 'assets/icons/visa.png';
   static const String iconsVisaa = 'assets/icons/visaa.png';
@@ -23,6 +24,7 @@ class Assets {
   static const String testSalad = 'assets/test/Salad.png';
   static const String testSandwitch = 'assets/test/Sandwitch.png';
   static const String testSuccess ! = 'assets/test/Success !.png';
+  static const String testTechGear = 'assets/test/TechGear.jpg';
   static const String testTomato = 'assets/test/tomato.png';
   static const String test🌶️ = 'assets/test/🌶️.png';
   static const String test🥶 = 'assets/test/🥶.png';

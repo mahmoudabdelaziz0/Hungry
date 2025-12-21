@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hungry/features/auth/view/login_view.dart';
+import 'package:hungry/features/auth/view/signup_view.dart';
 import 'package:hungry/root.dart';
 import 'package:hungry/splash.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor:Colors.white ,
 
       ) ,
-      home: Root(),
+      home: SplashView(),
     );
   }
 }

@@ -78,22 +78,6 @@ body: Padding(
         ),
         Gap(25),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-children: [
-  CustomText(text: 'Total',fontSize: 17,weight:FontWeight.bold ,),
-  CustomText(text: '\$ 18.9',fontSize: 20,weight:FontWeight.bold ,),
-
-],
-),
-CustomButton(text: 'Add To Cart',onTap: (){},),
-
-
-          ],
-        ),
       ],
       
 
@@ -101,6 +85,40 @@ CustomButton(text: 'Add To Cart',onTap: (){},),
   ),
 
 ),
+      bottomSheet: Container(
+        height: 120,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.shade800,
+                  blurRadius: 15,
+                  offset: Offset(0, 0)
+              )
+            ]
+        ),
+        child:
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(text: 'Total',fontSize: 17,weight:FontWeight.bold ,),
+                  CustomText(text: '\$ 18.9',fontSize: 20,weight:FontWeight.bold ,),
+
+                ],
+              ),
+              CustomButton(text: 'Add To Cart',onTap: (){},),
+
+
+            ],
+          ),
+        ),
+      ),
 
 
     );

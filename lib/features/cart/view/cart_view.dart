@@ -35,6 +35,13 @@ class CartView extends StatelessWidget {
 
       bottomSheet:  Container(
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              offset: const Offset(0, 0),
+              color: Colors.grey.shade800
+            )
+          ],
           color: Colors.white,
 borderRadius: BorderRadius.only(topLeft:
 Radius.circular(30),

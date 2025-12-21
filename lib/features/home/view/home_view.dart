@@ -56,7 +56,7 @@ flexibleSpace:    Padding(
   child: Column(
     children: [
 
-      UserHeader(username: "My Lovely Biba"),
+      UserHeader(username: "Tech Gear Team"),
 
       Gap(20),
 
@@ -102,7 +102,7 @@ childCount: 6,
 
     ,),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-          childAspectRatio: 0.59,
+          childAspectRatio: 0.65,
 
 
         )),

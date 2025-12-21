@@ -16,15 +16,17 @@ final  double? width;
 final  Color? color;
   @override
   Widget build(BuildContext context) {
+
     return
       GestureDetector(
         onTap: onTap,
         child: Container(
+
           width: width,
 height:height??55 ,
           padding: EdgeInsets.symmetric(horizontal: 18,vertical: 15),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
               color: color??AppColors.primary,
           ),
           child: Center(child: CustomText(text: text,weight: FontWeight.bold,color: Colors.white,fontSize: 16,)),

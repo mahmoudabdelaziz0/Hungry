@@ -36,7 +36,12 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       controller: widget.controller,
       cursorColor: AppColors.primary,
       cursorOpacityAnimates: true,
-      validator: (v){},
+      validator: (v){
+        if(v==null||v.isEmpty){
+          return 'Please fill ${widget.hint}';
+        }
+        null;
+      },
       obscureText: _obscureText,
 
 
@@ -48,14 +53,15 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 
 onTap: _togglePassword,
 
-            child: Icon(CupertinoIcons.eye)):null,
+            child: Icon(CupertinoIcons.eye,color: AppColors.primary,)):null,
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white)
+            borderSide: BorderSide(color: AppColors.primary)
 
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white)),
         hintText: widget.hint,
+        hintStyle: TextStyle(color: AppColors.primary),
         fillColor: Colors.white,
         filled: true,
 
