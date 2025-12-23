@@ -1,114 +1,150 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:hungry/core/constans/app_color.dart';
-import 'package:hungry/features/auth/view/signup_view.dart';
-import 'package:hungry/root.dart';
-import 'package:hungry/shared/custom_text.dart';
-import 'package:hungry/shared/custom_textfield.dart';
+import 'package:huungry/core/network/api_error.dart';
+import 'package:huungry/features/auth/data/auth_repo.dart';
+import 'package:huungry/features/auth/view/signup_view.dart';
+import 'package:huungry/root.dart';
+import 'package:huungry/shared/custom_button.dart';
+import 'package:huungry/shared/custom_text.dart';
 
+import '../../../core/constans/app_color.dart';
+import '../../../shared/customSnack.dart';
+import '../../../shared/custom_textfield.dart';
+import '../../../shared/glassContainer.dart';
 import '../widgets/custtom_btn.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController(text: 'MahmoudZizo@gmail.com');
+  final passController = TextEditingController(text: '12345678');
+  bool isLoading = false;
+  final authRepo = AuthRepo();
+
+  Future<void> login() async {
+    if (!formKey.currentState!.validate()) return;
+    setState(() => isLoading = true);
+
+    try {
+      final user = await authRepo.login(
+        emailController.text.trim(),
+        passController.text.trim(),
+      );
+      if (user != null) Navigator.push(context, MaterialPageRoute(builder: (_) =>  Root()));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        customSnack(e is ApiError ? e.message : 'Unhandled login error'),
+      );
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController emailContoller =TextEditingController();
-    TextEditingController passContoller =TextEditingController();
-    final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
-
     return GestureDetector(
-      onTap:()=> FocusScope.of(context).unfocus()
-      ,
-      child: Scaffold(
-        backgroundColor: Colors.white ,
-        body: Center(
-          child: Form(
-            key:_formKey ,
+      onTap: FocusScope.of(context).unfocus,
+      child: glassContainer(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Form(
+            key: formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-
-
-                Gap(200),
-            SvgPicture.asset('assets/logo/Logo_hungry.svg',color: AppColors.primary,),
-            CustomText(text: "Welcome Back,Discover The Fast Food", color: AppColors.primary, fontSize: 12, weight: FontWeight.w500)
-                ,
-                Gap(100),
-
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  color:  AppColors.primary,
-                  borderRadius: BorderRadius.only(topRight:Radius.circular(30),
-                      topLeft: Radius.circular(30))
-              ),
-              child: SingleChildScrollView(
-                child: Column(
+                const Gap(140),
+                Banner(
+                  color: Colors.green.shade700,
+                  message: 'Mahmoud Zizo',
+                  location: BannerLocation.topStart,
+                  child: SvgPicture.asset('assets/logo/logo.svg', color: Colors.white70),
+                ),
+                const Gap(10),
+                const CustomText(
+                  text: 'Welcome Back, Discover The Fast Food',
+                  color: Colors.white70,
+                  size: 13,
+                  weight: FontWeight.w500,
+                ),
+                const Gap(50),
+                Column(
                   children: [
-                    Gap(30),
-                    CustomTextfield(hint: "Emaill Address", isPassword: false, controller: emailContoller),
-                
-                    Gap(15),
-                
-                    CustomTextfield(hint: "Password ", isPassword: true, controller: passContoller),
-                    Gap(20),
-                
-                    CusttomAuthBtn(
-                      color:AppColors.primary ,
-                      textColor: Colors.white,
-                      text: "Login ",onTap: (){
-                      if(_formKey.currentState!.validate()){
-                        Navigator.push(context, MaterialPageRoute(builder: (c){
-                            return Root();
-                        }));
-                      }
-                
-                    },),
-                    Gap(15)
-                    ,
-                    ///go to SignUp
-                    CusttomAuthBtn(
+                    CustomTxtfield(
+                      controller: emailController,
+                      hint: 'Email Address',
+                      isPassword: false,
+                    ),
+                    const Gap(10),
+                    CustomTxtfield(
+                      controller: passController,
+                      hint: 'Password',
+                      isPassword: true,
+                    ),
+                    const Gap(20),
+                    CustomButton(
+                      height: 45,
+                      gap: 10,
+                      text: 'Login',
+                      color: Colors.white.withOpacity(0.9),
                       textColor: AppColors.primary,
-                      color: Colors.white,
-                      text: "Create Account ?",
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (c){
-                            return SignupView();
-                        }));
-                
-                      },),
-
-                    ///Guest
-                    Gap(20),
-                    GestureDetector(
-                      onTap:(){
-                        Navigator.push(context, MaterialPageRoute(builder: (c){return Root();}));
-                      } ,
-                        child: CustomText(text: 'Continue as a guest ?',
-                          fontSize: 13,
-                          color:Colors.orange ,
-                        weight: FontWeight.bold,
-                        )),
-
+                      widget: isLoading
+                          ? CupertinoActivityIndicator(color: AppColors.primary)
+                          : null,
+                      onTap: login,
+                    ),
+                    const Gap(20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomAuthBtn(
+                            text: 'Signup',
+                            textColor: Colors.white,
+                            onTap: () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (_) => const SignupView()),
+                            ),
+                          ),
+                        ),
+                        const Gap(15),
+                        Expanded(
+                          child: CustomAuthBtn(
+                            text: 'Guest',
+                            isIcon: true,
+                            textColor: Colors.white,
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) =>  Root()),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ),
-            ),
-          ),
 
-
-
+                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 55),
+                  child: Center(
+                    child: CustomText(
+                      size: 12,
+                      color: Colors.white,
+                      text: '@Mahmoud Abdelaziz',
+                      weight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ),
-
-
-
-
       ),
     );
   }

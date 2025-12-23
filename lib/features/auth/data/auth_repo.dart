@@ -2,10 +2,10 @@
 import 'package:dio/dio.dart';
 
 
-import '../../../core/utils/pref_helper.dart';
-import '../../../network/api_error.dart';
-import '../../../network/api_excpections.dart';
-import '../../../network/api_service.dart';
+import '../../../core/network/api_error.dart';
+import '../../../core/network/api_excpections.dart';
+import '../../../core/network/api_service.dart';
+import '../../../core/utlits/helpers.dart';
 import 'auth_model.dart';
 
 class AuthRepo {

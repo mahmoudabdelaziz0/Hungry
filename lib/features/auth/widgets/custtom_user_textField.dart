@@ -1,31 +1,40 @@
 import 'package:flutter/material.dart';
 
-class CusttomUserTextfield extends StatelessWidget {
-   CusttomUserTextfield({super.key,
-     required this.label,
-     required this.controller});
+import '../../../core/constans/app_color.dart';
+
+class CustomUserTxtField extends StatelessWidget {
+  const CustomUserTxtField({
+    super.key,
+    required this.controller,
+    required this.label,
+    this.textInputType,
+  });
   final TextEditingController controller;
   final String label;
+  final TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
-      cursorColor:Colors.white ,
       cursorHeight: 20,
-      style: TextStyle(color: Colors.white),
+      controller: controller,
+      keyboardType: textInputType,
+      cursorColor: AppColors.primary,
+      style: TextStyle(color: AppColors.primary, fontSize: 14),
       decoration: InputDecoration(
-        labelText:label ,
-        labelStyle: TextStyle(color: Colors.white),
+        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+        labelText: label,
+        labelStyle: TextStyle(color: AppColors.primary),
+        hintStyle: TextStyle(color: AppColors.primary),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: AppColors.primary),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary),
           borderRadius: BorderRadius.circular(15),
         ),
-        focusedBorder:OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(15),
-        ),),
-
+      ),
     );
   }
 }

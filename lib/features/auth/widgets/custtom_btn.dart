@@ -1,34 +1,47 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:gap/gap.dart';
 import '../../../core/constans/app_color.dart';
 import '../../../shared/custom_text.dart';
 
-class CusttomAuthBtn extends StatelessWidget {
-   CusttomAuthBtn({super.key, required this.text, this.onTap, this.color, this.textColor});
-   final String text;
-   final Color? color;
-   final Color? textColor;
-final Function() ? onTap;
+class CustomAuthBtn extends StatelessWidget {
+  const CustomAuthBtn({super.key, this.onTap, required this.text, this.color, this.textColor, this.isIcon});
+  final Function() ? onTap;
+  final String text;
+  final Color? color;
+  final Color? textColor;
+  final bool? isIcon;
 
   @override
   Widget build(BuildContext context) {
-    return                   GestureDetector(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: double.infinity,
-        height: 55,
+        height: 45,
         decoration: BoxDecoration(
-            color:color?? Colors.white,
-            borderRadius: BorderRadius.circular(12),
+          color: color ??  Colors.transparent,
+          borderRadius: BorderRadius.circular(7),
           border: Border.all(
-            color: Colors.white,
-          )
+            color: Colors.white60.withOpacity(0.5),
+          ),
         ),
-        child: Center(child: CustomText(text: text,fontSize:15 ,
-            color:textColor?? AppColors.primary,
-            weight: FontWeight.w600)),
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(child: CustomText(
+              text: text,
+              size: 14,
+              weight: FontWeight.w400,
+              color: textColor ??  AppColors.primary,
+            )),
+            if(isIcon == true)
+              Gap(5),
+            if(isIcon == true)
+              Icon(CupertinoIcons.person, color: Colors.grey.shade100,size: 16),
+          ],
+        ),
       ),
     );
-
   }
 }

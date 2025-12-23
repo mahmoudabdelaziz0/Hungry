@@ -1,71 +1,53 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/constans/app_color.dart';
 import '../../../shared/custom_text.dart';
 
-class FoodCatgory extends StatefulWidget {
-   FoodCatgory({super.key, required this.selectedIndex, required this.categoty});
+class FoodCategory extends StatefulWidget {
+  FoodCategory({super.key, required this.selectedIndex, required this.category});
+  final int selectedIndex;
+  final List category;
 
-   final int selectedIndex;
-
-  final List categoty;
   @override
-  State<FoodCatgory> createState() => _FoodCatgoryState();
+  State<FoodCategory> createState() => _FoodCategoryState();
 }
 
-class _FoodCatgoryState extends State<FoodCatgory> {
+class _FoodCategoryState extends State<FoodCategory> {
   late int selectedIndex;
 
   @override
   void initState() {
-    selectedIndex=widget.selectedIndex;
+    selectedIndex = widget.selectedIndex;
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
+    return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-
-        children: List.generate(widget.categoty.length, (index){
-
+        children: List.generate(widget.category.length, (index) {
           return GestureDetector(
-
-            onTap:(){
-              setState(() {
-                selectedIndex=index;
-              });
-
-            } ,
+            onTap: () => setState(() => selectedIndex = index),
             child: Container(
-                margin: EdgeInsets.only(right: 9),
-                decoration: BoxDecoration(
-                    color:selectedIndex==index?
-                    AppColors.primary:Color(0xffF3F4F6)
-
-
-
-                    ,
-                    borderRadius: BorderRadius.circular(20)
-
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 27,vertical: 15),
-                child:CustomText(text: widget.categoty[index],weight:FontWeight.w500,color: selectedIndex==index?Colors.white:Colors.grey.shade700)
-
-
-
+              margin: EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black12),
+                color: selectedIndex == index
+                    ? AppColors.primary
+                    : Color(0xffF3F4F6),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+              child: CustomText(
+                size: 14,
+                text: widget.category[index],
+                weight: FontWeight.w500,
+                color: selectedIndex == index ? Colors.white : Colors.grey.shade700,
+              ),
             ),
           );
         }),
       ),
-
-
-
-
-
-
     );
   }
 }

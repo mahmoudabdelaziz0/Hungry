@@ -1,95 +1,152 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:hungry/core/constans/app_color.dart';
-import 'package:hungry/features/auth/view/login_view.dart';
-import 'package:hungry/features/auth/widgets/custtom_btn.dart';
-import 'package:hungry/shared/custom_text.dart';
-import 'package:hungry/shared/custom_textfield.dart';
+import 'package:huungry/core/network/api_error.dart';
+import 'package:huungry/features/auth/data/auth_repo.dart';
+import 'package:huungry/root.dart';
+import 'package:huungry/shared/custom_button.dart';
+import '../../../core/constans/app_color.dart';
+import '../../../shared/customSnack.dart';
+import '../../../shared/custom_text.dart';
+import '../../../shared/custom_textfield.dart';
+import '../../../shared/glassContainer.dart';
+import '../widgets/custtom_btn.dart';
+import 'login_view.dart';
 
-class SignupView extends StatelessWidget {
+class SignupView extends StatefulWidget {
   const SignupView({super.key});
 
   @override
+  State<SignupView> createState() => _SignupViewState();
+}
+
+class _SignupViewState extends State<SignupView> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
+  AuthRepo authRepo = AuthRepo();
+  Future<void> signup () async {
+    if(formKey.currentState!.validate()) {
+      try {
+        setState(() => isLoading = true);
+        final user = await authRepo.signup(nameController.text.trim(), emailController.text.trim(), passController.text.trim());
+        if(user != null) {
+          Navigator.push(context, MaterialPageRoute(builder: (c) => Root()));
+        }
+        setState(() => isLoading = false);
+
+      } catch (e) {
+        setState(() => isLoading = false);
+        String errMsg = 'Error in Register';
+        if(e is ApiError) {
+          errMsg = e.message;
+        }
+        ScaffoldMessenger.of(context).showSnackBar(customSnack(errMsg));
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController nameContoller =TextEditingController();
-    TextEditingController emailContoller =TextEditingController();
-    TextEditingController passContoller =TextEditingController();
-    TextEditingController confirmPassContoller =TextEditingController();
+    return PopScope(
+      canPop: false,
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: glassContainer(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Gap(140),
+                    SvgPicture.asset('assets/logo/logo.svg' , color: Colors.white70),
+                    Gap(10),
+                    Center(child: CustomText(text: 'Welcome to our Food App' , color: Colors.white70)),
+                    Gap(40),
+                    Column(
+                      children: [
+                        Gap(30),
+                        CustomTxtfield(
+                          controller: nameController,
+                          hint: 'Name',
+                          isPassword: false,
+                        ),
+                        Gap(8),
+                        CustomTxtfield(
+                          controller: emailController,
+                          hint: 'Email Address',
+                          isPassword: false,
+                        ),
+                        Gap(8),
+                        CustomTxtfield(
+                          controller: passController,
+                          hint: 'Password',
+                          isPassword: true,
+                        ),
+                        Gap(20),
 
-    final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
+                        /// Sign up
+                        CustomButton(
+                          height: 45,
+                          gap: 10,
+                          widget: isLoading ? CupertinoActivityIndicator(color: AppColors.primary,) : null,
+                          color: Colors.white,
+                          textColor: AppColors.primary,
+                          text: 'Sign up',
+                          onTap: signup,
+                        ),
 
-    return GestureDetector(
-      onTap:()=> FocusScope.of(context).unfocus()
-      ,
-      child: Scaffold(
-        backgroundColor:Colors.white ,
-        body: Center(
-          child: Form(
-            key:_formKey ,
-            child: Column(
-              children: [
-                Gap(200),
-                SvgPicture.asset('assets/logo/Logo_hungry.svg',color: AppColors.primary,),
-                CustomText(text: "Welcome ,Discover The Fast Food", color: AppColors.primary, fontSize: 12, weight: FontWeight.w500)
-                ,
-                Gap(100),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color:  AppColors.primary,
-                      borderRadius: BorderRadius.only(topRight:Radius.circular(30),
-                      topLeft: Radius.circular(30))
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [            CustomTextfield(hint: " Name", isPassword: false, controller: nameContoller),
-                              Gap(20),
-                              CustomTextfield(hint: "Email Address ", isPassword: false, controller: emailContoller),
-                              Gap(20),
-                              CustomTextfield(hint: "Password  ", isPassword: true, controller: passContoller),
-                              Gap(30),
-                              CusttomAuthBtn(
-                                color:AppColors.primary ,
+                        Gap(20),
+                        Row(
+                          children: [
+                            ///  Login
+                            Expanded(
+                              child:   CustomAuthBtn(
+                                color: Colors.transparent,
                                 textColor: Colors.white,
-                                text: "Sign Up",onTap: (){
-                                if(_formKey.currentState!.validate()){
-                                  print("success Register");
-                                }
-                      
-                              },),
-                          Gap(10)
-                          ,
-                          CusttomAuthBtn(
-                            textColor: AppColors.primary,
-                            color: Colors.white,
-                            text: "Go To Login ?",
-                            onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (c){
-                            return LoginView();
-                          }));
-                      
-                          },),
-                      
-                      
-                      
-                      
-                      
-                        ],
-                      ),
+                                text: 'Login',
+                                onTap: () {
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c) {
+                                    return LoginView();
+                                  }));
+                                },
+                              ),
+                            ),
+                            Gap(15),
+                            /// Guest
+                            Expanded(
+                              child: CustomAuthBtn(
+                                color: Colors.transparent,
+                                textColor: Colors.white,
+                                text: 'Guest',
+                                onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (c) {
+                                      return Root();
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                )
-
-              ],
+                    Gap(290),
+                    CustomText(text: '@Mahmoud Abdelaziz', color: Colors.white, size: 10, weight: FontWeight.bold),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-
-
-
-
       ),
     );
   }

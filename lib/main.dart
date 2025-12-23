@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hungry/features/auth/view/login_view.dart';
-import 'package:hungry/features/auth/view/signup_view.dart';
-import 'package:hungry/root.dart';
-import 'package:hungry/splash.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:huungry/splash.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(
+    ScreenUtilInit(
+      designSize: const Size(375, 812),
+      builder: (context, child) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,12 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Hungry App',
       debugShowCheckedModeBanner: false,
-      title: 'hungry app ' ,
-      theme:ThemeData(
-        scaffoldBackgroundColor:Colors.white ,
-
-      ) ,
+      theme: ThemeData(
+        splashColor: Colors.transparent,
+        scaffoldBackgroundColor: Colors.white,
+      ),
       home: SplashView(),
     );
   }

@@ -2,31 +2,25 @@
 class Assets {
   Assets._();
 
-  static const String iconsCash = 'assets/icons/cash.png';
-  static const String iconsSettings = 'assets/icons/settings.svg';
-  static const String iconsVVisa = 'assets/icons/VVisa.jpeg';
-  static const String iconsVisa = 'assets/icons/visa.png';
-  static const String iconsVisaa = 'assets/icons/visaa.png';
-  static const String logoLogoHungry = 'assets/logo/Logo_hungry.svg';
-  static const String splashSplashBerger = 'assets/splash/splash_berger.png';
-  static const String testBerger = 'assets/test/Berger.png';
-  static const String testBicon = 'assets/test/Bicon.png';
-  static const String testBraber1 = 'assets/test/Braber1.png';
-  static const String testBrager2 = 'assets/test/Brager2.png';
-  static const String testBrager3 = 'assets/test/Brager3.png';
-  static const String testColeslaw = 'assets/test/Coleslaw.png';
-  static const String testFries = 'assets/test/Fries.png';
-  static const String testOninRings = 'assets/test/oninRings.png';
-  static const String testOnions = 'assets/test/onions.png';
-  static const String testPickeles = 'assets/test/Pickeles.png';
-  static const String testPicklle = 'assets/test/picklle.png';
-  static const String testPlus = 'assets/test/plus.png';
-  static const String testSalad = 'assets/test/Salad.png';
-  static const String testSandwitch = 'assets/test/Sandwitch.png';
-  static const String testSuccess ! = 'assets/test/Success !.png';
-  static const String testTechGear = 'assets/test/TechGear.jpg';
+  static const String 3dModelBurger = 'assets/3dModel/burger.glb';
+  static const String assetsLogo = 'assets/logo.png';
+  static const String bannerBanner = 'assets/banner/banner.gif';
+  static const String bannerOffers = 'assets/banner/Offers.gif';
+  static const String detailSandwitchDetail = 'assets/detail/sandwitch_detail.png';
+  static const String iconCash = 'assets/icon/cash.png';
+  static const String iconProfileVisa = 'assets/icon/profileVisa.png';
+  static const String iconShadow = 'assets/icon/shadow.png';
+  static const String logoLogo = 'assets/logo/logo.svg';
+  static const String lottieBackground lines wave = 'assets/lottie/background lines wave.json';
+  static const String lottieBurger = 'assets/lottie/burger.json';
+  static const String lottieChef = 'assets/lottie/chef.json';
+  static const String lottieLogin = 'assets/lottie/Login.json';
+  static const String splashSplash = 'assets/splash/splash.png';
+  static const String testBurger = 'assets/test/burger.glb';
+  static const String testFORMAL = 'assets/test/guest.png';
+  static const String testGuest = 'assets/test/guest.png';
+  static const String testKunckles = 'assets/test/kunckles.jpg';
+  static const String testTest = 'assets/test/test.png';
   static const String testTomato = 'assets/test/tomato.png';
-  static const String test🌶️ = 'assets/test/🌶️.png';
-  static const String test🥶 = 'assets/test/🥶.png';
 
 }

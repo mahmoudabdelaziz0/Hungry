@@ -1,47 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:lottie/lottie.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import '../../../core/constans/app_color.dart';
 import '../../../shared/custom_text.dart';
 
-class SpiceySlider extends StatelessWidget {
-  const SpiceySlider({super.key, required this.value, required this.onChanged});
-
+class SpicySlider extends StatefulWidget {
+  const SpicySlider({super.key, required this.value, required this.onChanged, required this.img});
   final double value;
-
-
   final ValueChanged<double> onChanged;
+  final String img;
+
+  @override
+  State<SpicySlider> createState() => _SpicySliderState();
+}
+
+class _SpicySliderState extends State<SpicySlider> {
 
   @override
   Widget build(BuildContext context) {
-    return        Row(
+    return Column(
       children: [
-        Image.asset("assets/test/Sandwitch.png",height: 215),
-        Spacer(),
-        Column(
-          children: [
-            CustomText(text: "Customize Your Burger\n to Your Tastes.\n Ultimate Experience",weight: FontWeight.w600,),
-            Slider(
-              min: 0,
-              max: 1,
-              value: value ,
-              onChanged: onChanged,
-              activeColor:AppColors.primary ,
-              inactiveColor: Colors.grey.shade300,
+        SizedBox(
+          height: 200,
+          width: double.infinity,
+          child: Image.network(widget.img),
+        ),
 
-
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 40.0),
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 3),
+              overlayShape: const RoundSliderOverlayShape(overlayRadius: 10),
+              trackHeight: 3,
             ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(text: '🥶 '),
-                Gap(110),
-                CustomText(text: '🌶️ '),
+            child: Slider(
+              min: 0,
+              max: 1,
+              value: widget.value,
+              onChanged: widget.onChanged,
+              inactiveColor: Colors.grey.shade900.withOpacity(0.2),
+              activeColor: AppColors.primary.withOpacity(0.7),
+            ),
+          ),
+        ),
 
-              ],)
-          ],
-        )
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 53),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomText(text: 'Cold 🥶', weight:  FontWeight.bold,size: 12,),
+              Gap(100),
+              CustomText(text: '🌶️ Hot', weight: FontWeight.bold, size: 12,),
+            ],
+          ),
+        ),
+
+
       ],
     );
   }
